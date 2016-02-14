@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="BCA.BlankPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BCA"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Padding="30">
+            <TextBlock FontSize="20" TextWrapping="WrapWholeWords" Text="Click on a game above to retrieve the rosters for each team which will appear on your left" TextAlignment="Justify"/>
+            <TextBlock FontSize="20" TextWrapping="WrapWholeWords" Text="Choose the information you want to see by clicking on button above and then clicking on the player." TextAlignment="Justify"/>
+            <TextBlock FontSize="20" TextWrapping="WrapWholeWords" Text="Click on the team button to toggle between home and away teamss." TextAlignment="Justify"/>
+            <TextBlock FontSize="20" TextWrapping="WrapWholeWords" Text="You can drag players up and down to change the position of the players in the list" TextAlignment="Justify"/>
+       <Button Name="addteams" Click="addteams_Click"/>
+        
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,64 @@
+﻿<Page
+    x:Class="BCA.PlayerNote"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BCA"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+           
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="ExtraBold" FontStyle="Italic" FontSize="15"
+                   Text="{x:Bind player.display_name}"/>
+        <TextBlock Grid.Row="1" >Player</TextBlock>
+
+        <TextBlock Grid.Row="2">Age</TextBlock>
+        <TextBlock Grid.Row="3">birthplace</TextBlock>
+        <TextBlock Grid.Row="4">Vitals</TextBlock>
+        <TextBlock Grid.Row="5">Notes</TextBlock>
+        <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=player.last_name}" Padding="0,0,5,0"/>
+            <TextBlock Text="{x:Bind Mode=OneWay, Path= player.first_name}" Padding="0,0,5,0"/>
+        </StackPanel>
+       
+
+        <TextBlock Grid.Row="2">Age</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=player.age}" Padding="0,0,5,0"/>
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=player.birthdate}" Padding="0,0,5,0"/>
+        </StackPanel>
+        <TextBlock Grid.Row="3">birthplace</TextBlock>
+
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{x:Bind Mode=OneWay, Path=player.birthplace}" Padding="0,0,5,0"/>
+                <TextBlock Grid.Row="4">Vitals</TextBlock>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="Height:"/>
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=player.height_cm}" Padding="0,0,5,0"/>
+            <TextBlock Text="Weight:" Margin="15,0,0,0"/>
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=player.weight_kg}" Padding="0,0,5,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="5">
+            <TextBlock>Notes</TextBlock>
+            <Button Name="savebtn" Click="savebtn_Click" Content="Save" Margin="0,20,0,0" Background="BlanchedAlmond"/>
+        </StackPanel>
+        
+        <TextBox Name="pn" Grid.Row="5" Grid.Column="1" 
+                 ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.VerticalScrollMode="Auto" 
+                 TextWrapping="Wrap" AcceptsReturn="True" 
+                 Text="{x:Bind Mode=TwoWay, Path=player.playernote}" Margin="25,15,15,15"/>
+      
+    </Grid>
+</Page>
