@@ -149,6 +149,7 @@ namespace BCA.Models
         public List<int> home_period_scores { get; set; }
         public int away_points_scored { get; set; }
         public int home_points_scored { get; set; }
+        public string gamenote { get; set; }
         public virtual string display_time
         {
             get

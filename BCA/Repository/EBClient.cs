@@ -14,7 +14,7 @@ namespace BCA.Repository
 {
     class EBClient
     {
-        private const string AuthHeader = "941d0c41-32bf-4035-a871-352940132a3b";
+        private const string AuthHeader = "ede47f5a-64f1-476c-b87b-b5242c0a43aa";
         private const string urlbase = "https://erikberg.com/";
         private const string staturl = "http://www.baseball-reference.com/players/";
         private const string wikiurl = "https://en.wikipedia.org/wiki/";
@@ -115,13 +115,14 @@ public static async Task GetGames(ObservableCollection<Event> games, DateTime my
             return await response.Content.ReadAsStringAsync(); 
          }
 
-        internal static string GetStatURL(string first_name, string last_name)
+        internal static string GetStatURL(string first_name, string last_name,int numb=1)
         {
-            int maxlength = 5;
+           int maxlength = 5;
             int maxflenght = 2;
             if (last_name.Length < 5) maxlength = last_name.Length;
             if (first_name.Length < 2) maxflenght = first_name.Length;
-            string response =  string.Format(staturl + "{0}/{1}{2}01.shtml", last_name.Substring(0, 1), last_name.Substring(0, maxlength), first_name.Substring(0, maxflenght));
+            string response =  string.Format(staturl + "{0}/{1}{2}{3}.shtml", last_name.Substring(0, 1), last_name.Substring(0, maxlength),
+                first_name.Substring(0, maxflenght),string.Format("{0:D2}",numb));
             response = RemoveDiacritics(response);
             return response.ToLower();
         }

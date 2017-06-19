@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BCA.Models
 {
+  
     public class PlayerVM : INotifyPropertyChanged { 
-
+public string id { get; set; }
     public string last_name { get; set; }
     public string first_name { get; set; }
     public string display_name { get; set; }
@@ -25,7 +26,7 @@ namespace BCA.Models
     public string position { get; set; }
     public int uniform_number { get; set; }
     public string team_id { get; set; }
-    public string mobileteamid { get; set; }
+    public string mobileteam_id { get; set; }
         [StringLength(1500)]
     private string _playernote { get; set; }
     public string playernote
@@ -65,7 +66,7 @@ public PlayerVM()
             weight_kg = p.weight_kg;
             weight_lb = p.weight_lb;
             team_id = teamid;
-            mobileteamid = "NotSet";
+            mobileteam_id = "NotSet";
         }
         private void NotifyPropertyChanged(String info)
         {

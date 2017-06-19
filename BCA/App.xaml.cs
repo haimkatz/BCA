@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using BCA.Models;
+using BCA.Repository;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace BCA
 {
@@ -26,12 +29,19 @@ namespace BCA
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+        /// 
+        public static string url = "https://gamenote2.azurewebsites.net/";
+
+        //public static string url = "https://localhost:44392/";
+        public static MobileServiceClient client = new MobileServiceClient(url);
+       
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
+            //Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
+            //    Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
+            //    Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
+            
             this.Suspending += OnSuspending;
         }
 

@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="BCA.TeamWF"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BCA"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="ExtraBold" 
+                   FontStyle="Italic" FontSize="15" Text="{x:Bind team.full_name}"/>
+        <TextBlock Grid.Row="1" >Team</TextBlock>
+
+        <TextBlock Grid.Row="2">League</TextBlock>
+        <TextBlock Grid.Row="3">Conference</TextBlock>
+        <TextBlock Grid.Row="4">Field</TextBlock>
+        <TextBlock Grid.Row="5">Notes</TextBlock>
+        <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="{x:Bind Mode=OneWay, Path=team.full_name}" Padding="0,0,5,0"/>
+          
+        </StackPanel>
+
+<TextBlock Grid.Row ="2" Grid.Column="1" Text="{x:Bind Mode=OneWay, Path=team.conference}" Padding="5,0,5,0"/>
+            <TextBlock  Grid.Row="3"  Grid.Column="2" Text="{x:Bind Mode=OneWay, Path=team.division}" Padding="5,0,5,0"/>
+      
+       
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{x:Bind Mode=OneWay, Path=team.site_name}" Padding="5,0,5,0"/>
+       
+        <StackPanel Orientation="Vertical" Grid.Row="5">
+            <TextBlock>Notes</TextBlock>
+            <Button Name="savebtn" Click="savebtn_Click" Content="Save" Margin="0,20,0,0" Background="BlanchedAlmond"/>
+            <Button Name="pastbtn" Click="getClipboard"  Content="Paste" Margin="0,20,0,0" Background="BlanchedAlmond"/>
+        </StackPanel>
+
+        <!--<RichEditBox Name="pn" Grid.Row="5" Grid.Column="1" 
+                 ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.VerticalScrollMode="Auto" 
+                 TextWrapping="Wrap"  Height="Auto"  Width="Auto" Visibility="Visible" Paste="pn_Paste"
+                 Margin="25,15,15,15"/>-->
+        <WebView Name="pn" Grid.Row="5" Grid.Column="1" 
+                 ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.VerticalScrollMode="Auto" 
+                  Height="Auto"  Width="Auto" Visibility="Visible" Source="ms-appx-web:///assets/editor.html"
+                 Margin="25,15,15,15" NavigationCompleted="pn_NavigationCompleted"/>
+
+    </Grid>
+</Page>

@@ -18,6 +18,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
+using HttpResponseMessage = System.Net.Http.HttpResponseMessage;
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,26 +29,25 @@ namespace BCA
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NoteWF : Page
+    public sealed partial class TeamWF : Page
     {
-
-        public PlayerVM player { get; set; }
-        public NoteWF()
-        {
-
+        public TeamVM team { get; set; }
+        public TeamWF()
+        {   
+           
             this.InitializeComponent();
-            player = new PlayerVM();
-
+        team = new TeamVM();
         }
-        private AZClient azc =new AZClient();
+  
+     
+       
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
 
-
             base.OnNavigatedTo(e);
 
-            player = (PlayerVM)e.Parameter;
+            team = (TeamVM)e.Parameter;
             //if (player.playernote != null)
             //{
             //    await SethtmlTextasync(player.playernote);
@@ -55,16 +57,8 @@ namespace BCA
 
         private async void savebtn_Click(object sender, RoutedEventArgs e)
         {
-           // AZMClient azc = new AZMClient();
-            try
-            {
-                player.playernote = await Gethtmlasync(); 
-            } 
-                catch (Exception ex)
-            {
-                var dialog = new MessageDialog(ex.Message);
-            }
-           
+            AZMClient azc = new AZMClient();
+            team.gamenotes = await Gethtmlasync();
             //var ms = new InMemoryRandomAccessStream();
             //using (ms)
             //{
@@ -72,27 +66,23 @@ namespace BCA
             //    //pn.Document.SaveToStream(Windows.UI.Text.TextGetOptions.FormatRtf,ms);
             //    // Repository.HTMLConverter.HtmlToRtfConverter.ConvertHtmlToRtf.
             //}
-            var response = await azc.SavePlayerasync(player);
-            if (response == false)
-            {
-                response = await azc.PutPLayerasync(player);
-                if (response == false)
-                {
-                    var dialog = new MessageDialog("Didn't work");
-                    await dialog.ShowAsync();
-                }
-            }
+            HttpResponseMessage response = await azc.saveTeamasync(team);
+            if (!response.IsSuccessStatusCode)
           
+            {
+                var dialog = new MessageDialog("Didn't work");
+                await dialog.ShowAsync();
+            }
         }
         private async void getClipboard(object sender, RoutedEventArgs e)
         {
-           String myresults;
+            String myresults;
             DataPackageView dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains(StandardDataFormats.Html))
-                {
+            {
                 myresults = await dataPackageView.GetHtmlFormatAsync();
-                           }
-           else if (dataPackageView.Contains(StandardDataFormats.Text))
+            }
+            else if (dataPackageView.Contains(StandardDataFormats.Text))
             {
                 myresults = await dataPackageView.GetTextAsync();
             }
@@ -119,12 +109,12 @@ namespace BCA
 
             var a = e.ToString();
         }
-        private async  Task  SethtmlTextasync(String mytext)
+        private async Task SethtmlTextasync(String mytext)
         {
             await pn.InvokeScriptAsync("setText", new string[] { mytext });
         }
         private async Task Sethtmlasync(string mytext)
-               {
+        {
             await pn.InvokeScriptAsync("setHtml", new string[] { mytext });
         }
 
@@ -135,24 +125,19 @@ namespace BCA
 
         private async void pn_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            if (player != null)
+            if (team != null)
             {
-                if (player.playernote != null)
+                if (team.gamenotes != null)
                 {
-                    await Sethtmlasync(player.playernote);
+                    await Sethtmlasync(team.gamenotes);
                 }
             }
         }
     }
-        //{
+   
 
-        //    TextRange textRange = new TextRange(rtb.Document.ContentStart,
+}
 
-        //        rtb.Document.ContentEnd);
-        
-        //    return textRange.Text;
 
-        //}
 
-    }
 

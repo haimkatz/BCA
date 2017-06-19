@@ -30,7 +30,8 @@ namespace BCA
 
         private async void addteams_Click(object sender, RoutedEventArgs e)
         {
-            await AZClient.postteamsasync();
+            AZMClient azc = new AZMClient();
+            await azc.postteamsasync();
         }
     }
 }

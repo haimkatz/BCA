@@ -57,7 +57,7 @@
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
             <Setter Property="TabNavigation" Value="Local"/>
             <Setter Property="IsHoldingEnabled" Value="True"/>
-            <Setter Property="Padding" Value="2,0,2,0"/>
+            <Setter Property="Padding" Value="1,0,1,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
             <Setter Property="MinWidth" Value="5"/>
@@ -104,7 +104,7 @@
         <Style x:Name="MyDPStyle" TargetType="DatePicker"  >
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="MinWidth" Value="100"/>
             <Setter Property="MaxWidth" Value="456"/>
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
             <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
@@ -244,15 +244,15 @@
                   HorizontalContentAlignment="Stretch">
                                 <Grid x:Name="FlyoutButtonContentGrid" >
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30*" x:Name="DayColumn" />
+                                        <ColumnDefinition Width="20*" x:Name="DayColumn" />
                                         <ColumnDefinition Width="Auto" x:Name="FirstSpacerColumn" />
-                                        <ColumnDefinition Width="30*" x:Name="MonthColumn" />
+                                        <ColumnDefinition Width="25*" x:Name="MonthColumn" />
                                         <ColumnDefinition Width="Auto" x:Name="SecondSpacerColumn" />
-                                        <ColumnDefinition Width="30*" x:Name="YearColumn" />
+                                        <ColumnDefinition Width="20*" x:Name="YearColumn" />
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock x:Name="DayTextBlock" Text="Day" TextAlignment="Center" Padding="0,3,0,5" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}" AutomationProperties.AccessibilityView="Raw"/>
-                                    <TextBlock x:Name="MonthTextBlock" Text="Month" TextAlignment="Left" Padding="10,3,0,5" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}" AutomationProperties.AccessibilityView="Raw"/>
+                                    <TextBlock x:Name="MonthTextBlock" Text="Month" TextAlignment="Left" Padding="5,3,0,5" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}" AutomationProperties.AccessibilityView="Raw"/>
                                     <TextBlock x:Name="YearTextBlock" Text="Year" TextAlignment="Center" Padding="0,3,0,5" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}" AutomationProperties.AccessibilityView="Raw"/>
 
                                     <Rectangle x:Name="FirstPickerSpacing" Fill="{ThemeResource SystemControlForegroundBaseLowBrush}" HorizontalAlignment="Center" Width="2" Grid.Column="1" />
@@ -290,7 +290,7 @@
                     <VisualState.Setters>
                         <!--<Setter Target="MySplitView.Pane.IsPanelOpen" Value="false" />-->
                         <Setter Target="toggleSV.Visibility" Value="Visible"/>
-                        <Setter Target="toggleSV.Content"   Value="Hide"/>
+                        <Setter Target="toggleSV.Content"   Value="&#xE0E2;"/>
                         <Setter Target="btnGamesToggle.Visibility" Value="Visible"></Setter>
                     </VisualState.Setters>
                 </VisualState>
@@ -302,7 +302,7 @@
                        
                         <!--<Setter Target="MySplitView.IsPaneOpen" Value="true" />-->
 
-                        <Setter Target="toggleSV.Content"   Value="Hide"/>
+                        <Setter Target="toggleSV.Content"   Value="&#xE0E2;"/>
                         <Setter Target="toggleSV.Visibility" Value="Collapsed"/>
                         <Setter Target="GameLV.Visibility" Value ="Visible"/>
                         <Setter Target="btnGamesToggle.Visibility" Value="Collapsed"/>
@@ -318,23 +318,30 @@
                     <MenuFlyout x:Name="mymenu" >
                         <MenuFlyoutItem Click="Statbtn_Click" Name="Stats" Text="Stats" CommandParameter="S"/>
                         <MenuFlyoutItem Click="Statbtn_Click" Name="Wiki" Text="Wiki" CommandParameter="W"/>
-                        <MenuFlyoutItem Click="Statbtn_Click" Name="Note" Text="Note" CommandParameter="N"/>
+                        <MenuFlyoutItem Click="Statbtn_Click" Name="PlayerNote" Text="Player Note" CommandParameter="N"/>
+                        <MenuFlyoutItem Click="Statbtn_Click" Name="PNoteRO" Text ="Player Note RO" CommandParameter="R"/>
+                        <MenuFlyoutItem Click="Statbtn_Click" Name="TNote" Text="Team Note" CommandParameter="T"/>
                         <MenuFlyoutItem Click="Statbtn_Click" Name="Inst" Text="Help" CommandParameter="B"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
-
-        </StackPanel>
-        <StackPanel Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
             <DatePicker Name="Gamedate" Style="{StaticResource MyDPStyle}" 
                         MonthFormat="{}{month.abbreviated(3)}" 
                         DayFormat="{}{day.integer}"
                         YearFormat="{}{year.abbreviated(2)}"
                         Width="Auto"
-                        HorizontalAlignment="Left" 
-                        Margin="5,5,0,0"
-                        Padding="0"
+                        HorizontalAlignment="Right" 
+                        Margin="30,5,7,0"
+                        Padding="10,0,0,0"
                      DateChanged="Gamedate_OnDateChanged" />
+            
+            
+           
+        </StackPanel>
+        <StackPanel Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+            <Button Name="btnGamesToggle" FontFamily="Segoe MDL2 Assets"  FontSize="6" Content="&#xE09D;" Margin="0"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BtnGamesToggle_OnClick"/>
+             
             <ProgressRing  Name="ProgRing"
                             Width="100"
                       Height="50"
@@ -343,15 +350,19 @@
                      
                       VerticalAlignment="Center"
                       HorizontalAlignment="Right"/>
-            <Button Name="btnGamesToggle" Click="BtnGamesToggle_OnClick">Hide Games</Button>
+
             <TextBlock Name="txtFeedback" Width="200" Height="50" TextWrapping="Wrap" Margin="10,0,0,0" />
+            <TextBlock Name="StatInc"  Text="If the player is not found, enter the player's name in the checkbox." 
+                     FontSize="10" FontStyle="Italic"  Visibility="Collapsed" Width="200" Margin="10,0,0,0"/>
+            <TextBlock Name="Account" TextAlignment="Right"   FontSize="6" Text="{x:Bind  thisuser.user_id}"  />
+        <Button x:Name="Logon" FontSize="6" Height="8" Content="Logon"  Click="Logon_OnClick"></Button>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0" Name="gridforbtn">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <StackPanel  Name="Teams" Orientation="Horizontal" >
                 <Button x:Name="HomeTBtn" Click="HomeTBtn_Click" FontSize="12" Margin="5,3,5,3" 
                             Content="{x:Bind Mode=OneWay, Path=hometeamname.lastname}"
@@ -362,11 +373,15 @@
                             Background="{Binding Background, ElementName=HPlayers}"/>
 
             </StackPanel>
-            <Button x:Name="toggleSV" Content="Hide"  Margin="0,0,0,0" Grid.Row="1" FontSize="10" HorizontalAlignment="Center"
-                VerticalAlignment="Bottom" Height="18" Padding="0" Click="toggleSV_Click"/>
+            <Button x:Name="toggleSV" FontFamily="Segoe MDL2 Assets" Content="&#xE0E2;"  Margin="0,0,0,0" Grid.Row="1" FontSize="6" HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"  Click="toggleSV_Click"/>
         </Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="1">
-            <ListView  Name="GameLV" IsItemClickEnabled="True"
+
+
+        <ScrollViewer Name ="mysv" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="1">
+          
+               
+                <ListView  Name="GameLV" RelativePanel.Below="btnGamesToggle" IsItemClickEnabled="True"
                        ItemsSource="{x:Bind games}"
                        Grid.Row="1"
                       Grid.Column="1"
@@ -377,29 +392,31 @@
                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
                    Padding="5,0,0,0">
 
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
 
-                    <DataTemplate x:DataType="data:Event">
+                        <DataTemplate x:DataType="data:Event">
 
-                        <StackPanel Orientation="Vertical"
+                            <StackPanel Orientation="Vertical"
                                            Background="#FF0E285F"
                                            Margin="2,5,2,5"
-                                        Width="40" Padding="0,0,0,0">
-                            <TextBlock Text="{x:Bind away_team.abbreviation}" HorizontalAlignment="Center" FontSize="11" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
-                            <TextBlock Text="vs" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
-                            <TextBlock Text="{x:Bind home_team.abbreviation}" HorizontalAlignment="Center"  FontSize="11" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
-                            <TextBlock Text="{x:Bind display_time}"  HorizontalAlignment="Center"  FontSize="10" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+                                        Width="50" Padding="0,0,0,0">
+                                <TextBlock Text="{x:Bind away_team.abbreviation}" HorizontalAlignment="Center" FontSize="11" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="vs" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                                <TextBlock Text="{x:Bind home_team.abbreviation}" HorizontalAlignment="Center"  FontSize="11" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="{x:Bind display_time}"  HorizontalAlignment="Center"  FontSize="10" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
 
-                        </StackPanel>
+                            </StackPanel>
 
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+     
         </ScrollViewer>
 
 
@@ -449,6 +466,7 @@
                                     <TextBlock Text="{x:Bind display_name}" HorizontalAlignment="left" Foreground="White"/>
 
                                     <TextBlock Text="{x:Bind position}" Margin="5,0,0,0" Foreground="White"/>
+                                  
 
                                 </StackPanel>
 
@@ -465,7 +483,7 @@
                   CanDrag="True"
                   ReorderMode="Enabled"
                   CanDragItems="True"
-                  CanReorderItems="True" Height="532" 
+                  CanReorderItems="True" 
                   VerticalAlignment="Top" ItemContainerStyle="{StaticResource ListViewItemStyle1}" ItemsPanel="{StaticResource ItemsPanelTemplate1}" >
 
                         <ListView.ItemTemplate>

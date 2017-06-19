@@ -30,11 +30,20 @@ namespace BCA
         {
             string myurl = (string)e.Parameter;
             if (myurl!= null)
+                if(myurl.ToLower().StartsWith("http"))
             {
                 StatWView.Source = new Uri(myurl, UriKind.Absolute);
             }
-           
+                else
+                {
+                    StatWView.NavigateToString(myurl);
+                }
             
+        }
+
+        public void Renavigate(string myurl)
+        {
+            this.StatWView.Source = new Uri(myurl, UriKind.Absolute);
         }
     }
 }
